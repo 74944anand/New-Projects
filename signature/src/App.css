@@ -1,0 +1,54 @@
+#drawingBoard {
+}
+
+.btnDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+#btn {
+  width: 200px;
+  border: 0;
+  padding: 10px;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.Clear {
+  background-color: red;
+}
+
+.Save {
+  background-color: green;
+}
+
+.Retrive {
+  background-color: yellow;
+}
+
+.colorPicker {
+  width: 300px;
+  height: 20px;
+  border: 1px solid black;
+  padding: 10px;
+  display: flex;
+}
+
+#color {
+  width: 200px;
+  height: 20px;
+  cursor: pointer;
+  border: 1px solid black;
+  margin-left: 10px;
+}
+
+.colorOption {
+  width: 400px;
+}
+
+#selector {
+  width: 200px;
+}
