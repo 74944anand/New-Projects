@@ -1,6 +1,6 @@
-#drawingBoard {
+.container {
+  width: 80%;
 }
-
 .btnDiv {
   display: flex;
   flex-direction: row;
@@ -9,7 +9,7 @@
   margin-top: 10px;
 }
 
-#btn {
+.btn {
   width: 200px;
   border: 0;
   padding: 10px;
@@ -17,19 +17,20 @@
   cursor: pointer;
 }
 
-.Clear {
+.clear {
   background-color: red;
 }
 
-.Save {
+.save {
   background-color: green;
 }
 
-.Retrive {
+.retrive {
   background-color: yellow;
 }
 
-.colorPicker {
+.colorPicker,
+.fontSizePicker {
   width: 300px;
   height: 20px;
   border: 1px solid black;
@@ -51,4 +52,10 @@
 
 #selector {
   width: 200px;
+}
+
+#fontSize {
+  width: 200px;
+  padding: auto;
+  height: 20px;
 }

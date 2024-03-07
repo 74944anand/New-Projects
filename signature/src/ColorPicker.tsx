@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 interface ColorPickerProps {
   color: string;
-  setColor: (color: string) => void;
+  handleColorChange: (color: string) => void;
 }
 
-const ColorPicker = ({ color, setColor }: ColorPickerProps) => {
+const ColorPicker = ({ color, handleColorChange }: ColorPickerProps) => {
   const colors = ["red", "green", "blue", "yellow"];
   const [isOpen, setIsOpen] = useState(false);
-
   const handleClick = (selectedColor: string) => {
-    setColor(selectedColor);
+    handleColorChange(selectedColor);
     setIsOpen(false); // Close color picker after selecting a color
   };
 
@@ -25,7 +24,6 @@ const ColorPicker = ({ color, setColor }: ColorPickerProps) => {
         }}
         onClick={() => setIsOpen(!isOpen)}
       ></div>
-
       {isOpen && (
         <div>
           <select

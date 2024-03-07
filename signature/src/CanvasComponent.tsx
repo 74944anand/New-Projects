@@ -1,7 +1,16 @@
-import  { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 
+interface CanvasProps {
+  color: string;
+  bgColor: string;
+  fontSize: number;
+}
 
-const CanvasComponent = () => {
+const CanvasComponent: React.FC<CanvasProps> = ({
+  color,
+  bgColor,
+  fontSize,
+}) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [isDrawing, setIsDrawing] = useState<boolean>(false);
   const [prevPosition, setPrevPosition] = useState<{
@@ -26,8 +35,8 @@ const CanvasComponent = () => {
       const { x: startX, y: startY } = prevPosition;
       const { clientX: endX, clientY: endY } = e;
 
-      context.strokeStyle = "#000000"; // Black color
-      context.lineWidth = 2;
+      context.strokeStyle = color; // Use the color prop for stroke color
+      context.lineWidth = fontSize;
       context.beginPath();
       context.moveTo(startX, startY);
       context.lineTo(endX, endY);
@@ -49,7 +58,8 @@ const CanvasComponent = () => {
       canvas.removeEventListener("mousemove", handleMouseMove);
       canvas.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [isDrawing, prevPosition]);
+  }, [color, isDrawing, prevPosition]);
+
   const clearCanvas = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -59,16 +69,37 @@ const CanvasComponent = () => {
 
     context.clearRect(0, 0, canvas.width, canvas.height);
   };
+
+  const downloadCanvas = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const dataUrl = canvas.toDataURL("image/png");
+    const a = document.createElement("a");
+    a.href = dataUrl;
+    a.download = "canvas_image.png";
+    a.click();
+  };
+
   return (
     <div id="drawingBoard">
       <canvas
         ref={canvasRef}
         width={1086}
         height={450}
-        style={{ border: "2px solid #000000" }} // Black border
+        style={{ border: "2px solid #000000", background: bgColor || "white" }} // Black border
       >
         Your browser does not support the HTML5 canvas tag.
       </canvas>
+      <div className="btnDiv">
+        <button className="clear btn" onClick={clearCanvas}>
+          Clear
+        </button>
+        <button className="save btn" onClick={downloadCanvas}>
+          Save and Download
+        </button>
+        <button className="retrive btn">Retrieve Saved Signature</button>
+      </div>
     </div>
   );
 };
